@@ -36,8 +36,9 @@ def load_config(path: str = CONFIG_FILE_PATH):
 
 def setup_tesseract():
     """
-    设置 Tesseract 可执行文件路径
-    优先检查程序目录下的 tesseract/tesseract.exe (便携版/打包版)
+    设置 Tesseract 可执行文件路径为内置的 Tesseract OCR
+
+    若没有，pytesseract 会使用系统 PATH 上的 tesseract.exe（没配置则会报错）
     """
     # 优先检查本地 bundled Tesseract
     if getattr(sys, 'frozen', False):
