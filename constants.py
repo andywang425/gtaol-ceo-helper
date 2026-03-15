@@ -47,7 +47,7 @@ DEFAULT_TOGGLE_KEY = "f12"
 # ========== 按键操作默认值 ==========
 ACTION_DEFAULT_DELAY = 0.05
 ACTION_DEFAULT_HOLD = 0.03
-ACTION_DEFAULT_REPEAT = 1
+ACTION_DEFAULT_TIMES = 1
 
 # ========== 颜色处理 ==========
 COLOR_HEX_LENGTH = 6

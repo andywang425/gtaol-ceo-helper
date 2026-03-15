@@ -2,7 +2,7 @@
 monitor:
   # 监控开关按键
   toggle_key: "f12"
-  
+
   # OCR 识别区域（“已加入人数/人数上限”所在的小区域）
   # 推荐设置：
   # 4k (3840x2160): x=3609, y=1974, width=172, height=55
@@ -18,7 +18,7 @@ monitor:
 actions:
   # 动作序列
   # key: 按下的键；支持 'm', 'enter', 'up', 'down' 等
-  # hold: 按下持续时长(秒)；delay: 每次按键后的延迟(秒)；repeat: 重复次数
+  # hold: 按下持续时长(秒)；delay: 每次按键后的延迟(秒)；times: 按键次数(默认1次)
   sequence:
     - key: "m" # 打开菜单
       hold: 0.03
@@ -26,8 +26,8 @@ actions:
     - key: "down" # 向下选择两次
       hold: 0.03
       delay: 0.06
-      repeat: 2
+      times: 2
     - key: "enter" # 连续确认三次
       hold: 0.03
       delay: 0.06
-      repeat: 3
+      times: 3

@@ -243,7 +243,7 @@ def execute_sequence(sequence: list):
 
     Args:
         sequence: 动作列表。每个动作示例：
-            {"key": "m", "delay": 0.1, "hold": 0.03, "repeat": 1}
+            {"key": "m", "delay": 0.1, "hold": 0.03, "times": 1}
     """
     print("开始执行操作序列...")
     original_pause = getattr(pydirectinput, "PAUSE", 0)
@@ -255,8 +255,8 @@ def execute_sequence(sequence: list):
                 continue
             delay = max(0.0, float(action.get("delay", ACTION_DEFAULT_DELAY)))
             hold = max(0.0, float(action.get("hold", ACTION_DEFAULT_HOLD)))
-            repeat = max(1, int(action.get("repeat", ACTION_DEFAULT_REPEAT)))
-            for _ in range(repeat):
+            times = max(1, int(action.get("times", ACTION_DEFAULT_TIMES)))
+            for _ in range(times):
                 pydirectinput.keyDown(key, _pause=False)
                 if hold > 0:
                     time.sleep(hold)
