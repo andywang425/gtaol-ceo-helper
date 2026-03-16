@@ -8,7 +8,7 @@ import pydirectinput
 import time
 import ctypes
 from mss.windows import MSS as mss
-from typing import Tuple, Optional, Dict, Any
+from typing import Tuple, Optional, Dict, Any, List
 from constants import *
 
 _mss_instance = None
@@ -32,6 +32,46 @@ def load_config(path: str = CONFIG_FILE_PATH):
 
     with open(path, "r", encoding="utf-8") as f:
         return yaml.safe_load(f)
+
+
+def build_action_profiles(profiles_cfg: list) -> List[Dict[str, Any]]:
+    """
+    从配置文件中构建监控方案配置
+
+    Args:
+        profiles_cfg: 监控方案配置列表
+
+    Returns:
+        监控方案配置列表，每个元素为一个字典，包含方案名称、开关键、操作序列和虚拟键码
+    """
+    profiles: List[Dict[str, Any]] = []
+
+    # 遍历配置文件中的每个监控方案，构造 profiles 方案列表
+    # TODO: 配置项校验不足，日后考虑使用 pydantic 或 dataclass 重写全部校验逻辑
+    for index, profile in enumerate(profiles_cfg):
+        toggle_key = str(profile.get("toggle_key"))
+        sequence = profile.get("sequence")
+
+        toggle_vk_code = get_virtual_key_code(toggle_key)
+        if toggle_vk_code is None:
+            raise ValueError(f"不支持的监控开关键: {toggle_key}")
+
+        name = profile.get("name", f"方案{index + 1}")
+        profiles.append({
+            "name": str(name),
+            "toggle_key": toggle_key,
+            "sequence": sequence,
+            "toggle_vk_code": toggle_vk_code,
+        })
+
+    used_keys = {}
+    for profile in profiles:
+        key_name = profile["toggle_key"].lower()
+        if key_name in used_keys:
+            raise ValueError(f"监控开关键重复: {profile['toggle_key']}")
+        used_keys[key_name] = True
+
+    return profiles
 
 
 def setup_tesseract():

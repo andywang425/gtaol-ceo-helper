@@ -1,6 +1,18 @@
 import time
 import ctypes
-from utils import is_vk_pressed
+
+
+def is_vk_pressed(vk_code: int) -> bool:
+    """
+    检查指定的虚拟键码是否当前被按下
+
+    Args:
+        vk_code: 虚拟键码
+
+    Returns:
+        如果键被按下则返回 True，否则返回 False
+    """
+    return (ctypes.windll.user32.GetAsyncKeyState(vk_code) & 0x8000) != 0
 
 
 class POINT(ctypes.Structure):

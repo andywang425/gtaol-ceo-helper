@@ -12,8 +12,7 @@ def main():
 
     config = load_config()
 
-    monitor_cfg = config.get("monitor")
-    region_cfg = monitor_cfg.get("region")
+    region_cfg = config.get("region")
     region = (
         region_cfg.get("x"),
         region_cfg.get("y"),

@@ -1,41 +1,55 @@
-# 屏幕监控配置
-monitor:
-  # 监控开关键，按一次开启，再按一次关闭
-  # 支持的按键详见下文
-  toggle_key: "f12"
+# OCR 识别区域
+# 单位：屏幕像素
+# 程序会截图这个矩形区域识别“已加入人数/人数上限”
+# x, y: 矩形左上角坐标
+# width, height: 矩形宽高
+#
+# 全屏游戏时各屏幕分辨率推荐设置：
+# 4k (3840x2160): x=3609, y=1974, width=172, height=55
+# 2k (2560x1440): x=2409, y=1314, width=105, height=37
+# 1080p (1920x1080): x=1807, y=986, width=78, height=27
+region:
+  x: 3609
+  y: 1974
+  width: 172
+  height: 55
 
-  # OCR 识别区域
-  # 单位：屏幕像素
-  # 程序会截图这个矩形区域识别“已加入人数/人数上限”
-  # x, y: 矩形左上角坐标
-  # width, height: 矩形宽高
-  #
-  # 全屏游戏时各屏幕分辨率推荐设置：
-  # 4k (3840x2160): x=3609, y=1974, width=172, height=55
-  # 2k (2560x1440): x=2409, y=1314, width=105, height=37
-  # 1080p (1920x1080): x=1807, y=986, width=78, height=27
-  region:
-    x: 3609
-    y: 1974
-    width: 172
-    height: 55
+# 监控方案
+# 每个方案包含一个名称 (name)、一个开关键 (toggle_key) 和一个按键序列 (sequence)
+# 开关键 (toggle_key)：以当前方案开始监控/停止监控/切换到当前方案
+# 按键序列 (sequence)：包含多个按键操作
+# 每个按键操作包含一个按键 (key)、一个按住时间 (hold)、一个延迟时间 (delay) 和一个执行次数 (times)
+# 按键 (key)：支持 'm', 'enter', 'up', 'down' 等（还支持很多其它的，但是卡CEO时用不到）
+# 按住时间：按键保持按下的时间（单位秒，默认值为 0.05）
+# 延迟时间：每次按键之后等待的时间（单位秒，默认值为 0.1）
+# 执行次数：按键操作执行的次数（默认值为 1）
+profiles:
+  - name: "室外"
+    toggle_key: "f11"
+    sequence:
+      - key: "m" # 打开菜单
+        hold: 0.03
+        delay: 0.18
+      - key: "down" # 向下移动一次
+        hold: 0.03
+        delay: 0.06
+        times: 1
+      - key: "enter" # 连续确认三次
+        hold: 0.03
+        delay: 0.06
+        times: 3
 
-# 执行动作
-actions:
-  # 动作序列
-  # key: 按下的键。支持 'm', 'enter', 'up', 'down' 等（还支持很多其它的，但是卡CEO时用不到）
-  # hold: 按下持续时长(秒)。默认0.1秒
-  # delay: 每次按键后的延迟(秒)。默认0.05秒
-  # times: 按键次数。默认1次
-  sequence:
-    - key: "m" # 打开菜单
-      hold: 0.03
-      delay: 0.18
-    - key: "down" # 向下选择两次
-      hold: 0.03
-      delay: 0.06
-      times: 2
-    - key: "enter" # 连续确认三次
-      hold: 0.03
-      delay: 0.06
-      times: 3
+  - name: "室内"
+    toggle_key: "f12"
+    sequence:
+      - key: "m" # 打开菜单
+        hold: 0.03
+        delay: 0.18
+      - key: "down" # 向下移动两次
+        hold: 0.03
+        delay: 0.06
+        times: 2
+      - key: "enter" # 连续确认三次
+        hold: 0.03
+        delay: 0.06
+        times: 3
