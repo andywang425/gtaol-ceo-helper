@@ -6,10 +6,10 @@
 
 ## 安装
 
-1. 前往 [Release 页面](https://github.com/andywang425/gtaol-ceo-helper/releases/latest)，下载 `gtaol-ceo-helper.zip`、`tesseract.7z` 和 `find_coords.exe`（可选）。
+1. 前往 [Release 页面](https://github.com/andywang425/gtaol-ceo-helper/releases/latest)，下载 `gtaol-ceo-helper.zip`、`tesseract.7z` 和 `RegionLocator.exe`（可选）。
 2. 解压 `gtaol-ceo-helper.zip` 到任意目录。
 3. 把 `tesseract.7z` 解压到 `gtaol-ceo-helper` 目录下。
-4. 编辑 `config.yaml` 配置文件。过程中可能会用到 `find_coords.exe` 辅助定位 OCR 区域。
+4. 编辑 `config.yaml` 配置文件。过程中可能会用到 `RegionLocator.exe` 辅助定位 OCR 区域。
 
 ## 配置项说明（`config.yaml`）
 
@@ -101,13 +101,13 @@ profiles:
 
 ## 定位 OCR 区域
 
-如果需要定位 OCR 区域，可使用 `find_coords.exe` 辅助工具。
+如果需要定位 OCR 区域，可使用 `RegionLocator.exe` 辅助工具。
 
 这是一个 OCR 识别区域示例，红色矩形是你需要手动定位的区域：
 
 ![OCR 识别区域示例](assets/识别区域示例.png)
 
-使用方法：首先进游戏匹配差事，像示例中那样匹配到差事后，全屏截图。运行 `find_coords.exe`，以全屏的方式打开这张截图，然后根据软件提示定位矩形识别区域区域。定位需要准确，不能太多（比如把左侧差事名称包含进去），也不能太少（注意”已加入人数”和“人数上限”这两个数都可能为两位数）。
+使用方法：首先进游戏匹配差事，像示例中那样匹配到差事后，全屏截图。运行 `RegionLocator.exe`，以全屏的方式打开这张截图，然后根据软件提示定位矩形识别区域区域。定位需要准确，不能太多（比如把左侧差事名称包含进去），也不能太少（注意”已加入人数”和“人数上限”这两个数都可能为两位数）。
 
 ## 注意
 

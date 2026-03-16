@@ -1,5 +1,4 @@
 $ErrorActionPreference = "Stop"
-Set-StrictMode -Version Latest
 
 function Invoke-Step {
     param(
@@ -22,22 +21,16 @@ if (-not (Test-Path ".venv\Scripts\python.exe")) {
 
 Invoke-Step { uv sync --group dev --frozen }
 
-if (Test-Path "dist") {
-    Write-Host "Cleaning dist folder..."
-
-    Get-ChildItem -Path "dist" -Directory |
-    Where-Object { $_.Name -inotlike "tesseract*" } |
-    Remove-Item -Recurse -Force
-
-    Get-ChildItem -Path "dist" -File |
-    Where-Object { $_.Name -inotlike "tesseract*" } |
-    Remove-Item -Force
-}
-
+Write-Host "Building gtaol-ceo-helper..."
 Invoke-Step { uv run pyinstaller --noconfirm --clean --onefile --console --name "gtaol-ceo-helper" main.py }
-Copy-Item -Path "config.example.yaml" -Destination "dist\config.yaml" -Force
-Invoke-Step { uv run pyinstaller --noconfirm --clean --onefile --console --name "find_coords" find_coords.py }
 
+Write-Host "Copying config.example.yaml to dist\config.yaml"
+Copy-Item -Path "config.example.yaml" -Destination "dist\config.yaml" -Force
+
+Write-Host "Building RegionLocator..."
+Invoke-Step { gcc -Wall -Wextra -O2 "RegionLocator.c" -o "dist\RegionLocator.exe" }
+
+Write-Host "Packaging gtaol-ceo-helper.exe and config.yaml into zip..."
 $packageDir = "dist\gtaol-ceo-helper"
 New-Item -Path $packageDir -ItemType Directory -Force | Out-Null
 Copy-Item -Path "dist\gtaol-ceo-helper.exe" -Destination $packageDir -Force
