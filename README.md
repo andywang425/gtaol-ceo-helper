@@ -63,14 +63,14 @@ actions:
   <summary> toggle_key 支持的按键（点击展开）</summary>
 
 - 功能键：`f1` ~ `f24`
-- 单个字母或数字：`a`~`z`、`0`~`9`
+- 单个字母或数字：`a` ~ `z`、`0` ~ `9`
 - 特殊键：
   - `backspace`, `tab`, `enter`, `shift`, `ctrl`, `alt`, `pause`, `capslock`, `esc`, `space`
   - `pageup`, `pagedown`, `end`, `home`
   - `left`, `up`, `right`, `down`
   - `insert`, `delete`
 - 小键盘：
-  - 数字：`numpad0`~`numpad9` 或 `kp0`~`kp9`
+  - 数字：`numpad0` ~ `numpad9` 或 `kp0` ~ `kp9`
   - 运算符：除号 `numpad_div`(`num_div`), 乘号 `numpad_mul`(`num_mul`), 减号 `numpad_sub`(`num_sub`), 加号 `numpad_add`(`num_add`), 小数点 `numpad_decimal`(`num_decimal`),
 
 > 不区分大小写，例如 `F12` 和 `f12` 等价。
